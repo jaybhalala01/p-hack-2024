@@ -1,5 +1,10 @@
 # Vehicle Detection and Tracking Application
 
+<video width="640" height="400" controls>
+  <source src="demo_video/demo.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
 ## Overview
 
 This repository contains a Flask-based web application for vehicle detection and tracking. The application uses object detection to identify vehicles and their number plates in uploaded videos. It tracks these objects frame-by-frame, maintaining a count of currently visible and total detected vehicles and number plates.
