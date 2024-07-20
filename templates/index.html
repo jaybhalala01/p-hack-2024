@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="icon" type="image" href="{{ url_for('static',filename='assets/img/logo69.png')  }}">
+
+  <title></title>
+  <link rel="stylesheet" type="text/css"
+    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+
+  <!-- Nucleo Icons -->
+  <link href="{{ url_for('static',filename='assets/css/nucleo-icons.css') }}" rel="stylesheet" />
+
+  <link href="{{ url_for('static',filename='assets/css/nucleo-svg.css')}}" rel="stylesheet" />
+
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+
+  <!-- CSS Files -->
+  <link id="pagestyle" href="{{ url_for('static',filename='assets/css/material-kit.css') }}" rel="stylesheet" />
+
+  <script defer data-site="quality-critics.com" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
+</head>
+
+<body class="index-page bg-gray-200">
+
+
+  <header class="header-2">
+    <div class="page-header min-vh-75 relative" style="background-image: url('static/assets/img/bg70.jpg')">
+      <!--<span class="mask bg-gradient-primary opacity-4"></span>-->
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-7 text-center mx-auto">
+            <h1 class="text-black pt-3 mt-n5 cont1" style="font-size: 3.5rem;">Real Time Object Detection</h1>
+            <span style=" font-size: 40px;"><b>"<span style="color:#FE6D73; font-size: 40px;" class="cont1">DETECT</span> -
+                  <span style="color:#174075; font-size: 40px;" class="cont1">TRACK</span> - <span
+                    style="color:#FFCB77; font-size: 40px;" class="cont1">SECURE</span>"</b></span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="card card-body blur shadow-blur mx-3 mx-md-4 mt-n6">
+
+    <section class="pt-3 pb-4" id="count-stats">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-9 mx-auto py-3">
+            <div class="row">
+              <div class="col-md-4 position-relative">
+                <div class="p-3 text-center">
+                  <h1 class="text-gradient text-primary">2</h1>
+                  <h5 class="mt-3">Models</h5>
+                  <p class="text-sm font-weight-normal">We have trained 2 model from the project.</p>
+                </div>
+                <hr class="vertical dark">
+              </div>
+              <div class="col-md-4 position-relative">
+                <div class="p-3 text-center">
+                  <h1 class="text-gradient text-primary"> <span id="state2" countTo="15">5</span>+</h1>
+                  <h5 class="mt-3">Accuracy Metrics</h5>
+                  <p class="text-sm font-weight-normal">We offer more than 5 ways to calculate the model's Accuracy.</p>
+                </div>
+                <hr class="vertical dark">
+              </div>
+              <div class="col-md-4">
+                <div class="p-3 text-center">
+                  <h1 class="text-gradient text-primary" id="state3" countTo="4">2 secs</h1>
+                  <h5 class="mt-3">Average Response Time</h5>
+                  <p class="text-sm font-weight-normal">Save much of your hectic time once the model is trained</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!--- First Division for options-->
+    <section class="my-5 py-5">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-4 ms-auto me-auto p-lg-4 mt-lg-0 mt-4">
+            <div class="rotating-card-container">
+              <div class="card card-rotate card-background card-background-mask-primary shadow-primary mt-md-0 mt-5">
+                <div class="front front-background"
+                  style="background-image: url('static/assets/img/milkyway.jpg'); background-size: cover;">
+                  <div class="card-body py-7 text-center">
+                    <i class="material-icons text-white text-4xl my-3">sensor_occupied</i>
+                    <h3 class="text-white">Let's Track <br /> Vehicles</h3>
+                    <p class="text-white opacity-8">Upload the video, Draw the ROI and click here to start inferencing....</p>
+                  </div>
+                </div>
+                <div class="back back-background"
+                  style="background-image: url('static/assets/img/night.jpg'); background-size: cover;">
+                  <div class="card-body pt-7 text-center">
+                    <h3 class="text-white">Ready for inferencing</h3>
+                    <p class="text-white opacity-8"> Try a hands on view.</p>
+                    <a href="{{url_for('detect_screen')}}"
+                      class="btn btn-white btn-sm w-50 mx-auto mt-3">Start</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="col-lg-6 ms-auto">
+            <div class="row justify-content-start">
+              <div class="col-md-6">
+                <div class="info">
+                  <i class="material-icons text-gradient text-primary text-3xl">content_copy</i>
+                  <h5 class="font-weight-bolder mt-3">Full Documentation</h5>
+                  <p class="pe-5">Built by developers for developers. Check the foundation and you will find everything
+                    inside our documentation.</p>
+
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="info">
+                  <i class="material-icons text-gradient text-primary text-3xl">flip_to_front</i>
+                  <h5 class="font-weight-bolder mt-3">Bootstrap 5 Ready</h5>
+                  <p class="pe-3">The world’s most popular front-end open source toolkit, featuring Sass variables and
+                    mixins.</p>
+                </div>
+              </div>
+            </div>
+            <div class="row justify-content-start mt-5">
+              <div class="col-md-6 mt-3">
+                <i class="material-icons text-gradient text-primary text-3xl">price_change</i>
+                <h5 class="font-weight-bolder mt-3">Save Time & Money</h5>
+                <p class="pe-5">Creating your design from scratch with dedicated designers can be very expensive. Start
+                  with our Design System.</p>
+              </div>
+              <div class="col-md-6 mt-3">
+                <div class="info">
+                  <i class="material-icons text-gradient text-primary text-3xl">devices</i>
+                  <h5 class="font-weight-bolder mt-3">Fully Responsive</h5>
+                  <p class="pe-3">Regardless of the screen size, the website content will naturally fit the given
+                    resolution.</p>
+                </div>
+              </div>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+</body>
+
+</html>

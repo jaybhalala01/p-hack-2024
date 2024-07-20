@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" type="image" href="{{ url_for('static',filename='assets/img/logo69.png')  }}">
+    <title></title>
+    <link rel="stylesheet" type="text/css"
+        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+    <!-- Nucleo Icons -->
+    <link href="{{ url_for('static',filename='assets/css/nucleo-icons.css') }}" rel="stylesheet" />
+    <link href="{{ url_for('static',filename='assets/css/nucleo-svg.css')}}" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <!-- CSS Files -->
+    <!-- <link id="pagestyle" href="{{ url_for('static',filename='assets/css/material-kit.css') }}" rel="stylesheet" /> -->
+    <link href="{{ url_for('static',filename='assets/css/material-kit-2.css') }}" rel="stylesheet" />
+    <script type="text/javascript" src="{{ url_for('static',filename='assets/json/track.json') }}"></script>
+
+    <!-- <script defer data-site="quality-critics.com" src="https://api.nepcha.com/js/nepcha-analytics.js"></script> -->
+    <style>
+        .dynamic-values {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .dynamic-values .text-body {
+            background: #333;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+
+</head>
+
+<body class="index-page bg-gray-200" style="background-color: rgb(23, 22, 22);">
+    <div class="main-container">
+        <div class="video-container">
+            <div class="video-up-container">
+                <div class="video-up">
+                    <div class="file-upload">
+                        <input type="file" id="file" class="file" onchange="updateLabel()">
+                        <div id="file-name" class="file-name">No file chosen</div>
+                        <br>
+                        <label for="file" class="file-label">
+                            <i class="material-icons-round">cloud_upload</i>
+                            <span>Upload Video</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <img src="" id="videoStream" style="display: none; width: 100%; height: 100%;">
+        </div>
+        <div class="side-bar">
+            <div class="dynamic-values">
+                <div class="text-white text-body">
+                    <h3 class="text-white">Total Vehicles</h3>
+                    <p>0</p>
+                </div>
+                <div class="text-white text-body">
+                    <h3 class="text-white">Total Number Plates</h3>
+                    <p>0</p>
+                </div>
+                <div class="text-white text-body">
+                    <h3 class="text-white">Current Vehicles</h3>
+                    <p>0</p>
+                </div>
+                <div class="text-white text-body">
+                    <h3 class="text-white">Current Number Plates</h3>
+                    <p>0</p>
+                </div>
+            </div>
+
+            <div class="img-container">
+                <h3>Vehicle: </h3>
+                <div class="vehicle-img">
+                    <img src="{{ url_for('static', filename='assets/img/bg70.jpg') }}" alt="Vehicle Image"
+                        style="width: 100%; height: 100%; object-fit: contain;">
+                </div>
+                <h4>License Plate: </h4>
+                <div class="lp-img">
+                    <img src="{{ url_for('static', filename='assets/img/bg70.jpg') }}" alt="Number Plate Image"
+                        style="width: 100%; height: 100%; object-fit: contain;">
+                </div>
+
+            </div>
+            <h3>Detected Vehicle No: <br> GJ27 01 8239</h3>
+        </div>
+    </div>
+    <div class="bottom">
+        <button id="detect-btn" class="btn btn-white btn-sm w-50 mx-auto mt-3">Detect</button>
+        <button id="play-pause-btn" class="btn btn-white btn-sm w-50 mx-auto mt-3"
+            style="background-color: green;">Play</button>
+        <!-- <button id="replay-btn" class="btn btn-white btn-sm w-50 mx-auto mt-3">Replay</button> -->
+        <button id="cancel-btn" class="btn btn-white btn-sm w-50 mx-auto mt-3">Cancel</button>
+
+    </div>
+
+    <script src="{{ url_for('static',filename='assets/js/script.js')}}"></script>
+</body>
+
+</html>
