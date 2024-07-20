@@ -93,6 +93,7 @@ def generate_video_stream(filename):
         "total_license": 0,
         "current_vehicle": 0,
         "current_license": 0,
+        "vehicles": []
     }
     while cap.isOpened():
         global play_video
@@ -250,6 +251,18 @@ def cancel_stream():
     cancel_stream = True
     play_video = False
     return jsonify({"status": "Stream canceled"})
+
+@app.route("/active_number_plates/<filename>")
+def active_number_plates(filename):
+    img = cv2.imread("active_number_plates/"+filename)
+    _, buffer = cv2.imencode(".jpg", img)
+    frame = buffer.tobytes()
+    return Response(
+        (b"--frame\r\n" b"Content-Type: image/jpeg\r\n\r\n" + frame + b"\r\n"),
+        mimetype="multipart/x-mixed-replace; boundary=frame",
+    )
+    
+
 
 
 if __name__ == "__main__":
