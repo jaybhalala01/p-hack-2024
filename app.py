@@ -158,8 +158,8 @@ def generate_video_stream(filename):
                 f"{track.object_id}- {track.object_class}",
                 (x1, y1 - 10),
                 cv2.FONT_HERSHEY_SIMPLEX,
-                1,
-                color,
+                2,
+                (255, 255, 0),
                 3,
             )
 

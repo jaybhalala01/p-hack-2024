@@ -20,7 +20,7 @@ function readJSON() {
                 container.innerHTML = `
                     <div class="img-container">
                         <div class="lp-img">
-                            <img src="" alt="Number Plate Image"
+                            <img src="" alt="No Image"
                                 style="width: 100%; height: 100%; object-fit: contain;">
                         </div>
                     </div>
@@ -57,7 +57,7 @@ function readJSON() {
                     container.innerHTML = `
                         <div class="img-container">
                             <div class="lp-img">
-                                <img src="" alt="Number Plate Image"
+                                <img src="" alt="No Image"
                                     style="width: 100%; height: 100%; object-fit: contain;">
                             </div>
                         </div>
@@ -67,7 +67,7 @@ function readJSON() {
                         const vehicleHTML = `
                             <div class="img-container">
                                 <div class="lp-img">
-                                    <img src="${vehicle}" alt="Number Plate Image"
+                                    <img src="${vehicle}" alt="No Image"
                                         style="width: 100%; height: 100%; object-fit: contain;">
                                 </div>
                             </div>
