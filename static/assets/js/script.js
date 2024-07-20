@@ -1,66 +1,108 @@
 var isPlaying = false; // Track whether the video is currently playing
 var isDetecting = false; // Track whether the video is currently detecting
-
+var intervalId = 0; // Track the interval ID for the JSON data
 
 function readJSON() {
-    try {
-        // Fetch the JSON file from the server
-        var data = JSON.parse(data);
-        console.log(data);
+    fetch('/track_data')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (!isDetecting) {
+                // Assuming 'vehicles' is the key in your JSON data
+                const vehicles = data.vehicles;
+                const container = document.querySelector('.img-container');
+                container.innerHTML = ''; // Clear previous content
 
-        // Update the HTML with the JSON data
-        document.querySelector('.dynamic-values').innerHTML = `
-            <div class="text-white text-body">
-                <h3 class="text-white">Total Vehicles</h3>
-                <p>${data.total_vehicle}</p>
-            </div>
-            <div class="text-white text-body">
-                <h3 class="text-white">Total Number Plates</h3>
-                <p>${data.total_license}</p>
-            </div>
-            <div class="text-white text-body">
-                <h3 class="text-white">Current Vehicles</h3>
-                <p>${data.current_vehicle}</p>
-            </div>
-            <div class="text-white text-body">
-                <h3 class="text-white">Current Number Plates</h3>
-                <p>${data.current_license}</p>
-            </div>
-        `;
-    } catch (error) {
-        console.error('Error fetching the JSON file:', error);
-    }
+                container.innerHTML = `
+                    <div class="img-container">
+                        <div class="lp-img">
+                            <img src="" alt="Number Plate Image"
+                                style="width: 100%; height: 100%; object-fit: contain;">
+                        </div>
+                    </div>
+                `;// Append the new HTML
+
+                document.querySelector('.dynamic-values').innerHTML = `
+                <div class="text-white text-body">
+                    <h3 class="text-white">Total Vehicles</h3>
+                    <p>0</p>
+                </div>
+                <div class="text-white text-body">
+                    <h3 class="text-white">Total Number Plates</h3>
+                    <p>0</p>
+                </div>
+                <div class="text-white text-body">
+                    <h3 class="text-white">Current Vehicles</h3>
+                    <p>0</p>
+                </div>
+                <div class="text-white text-body">
+                    <h3 class="text-white">Current Number Plates</h3>
+                    <p>0</p>
+                </div>
+            `;
+
+            }
+
+            // Update the HTML with the JSON data
+            if (isPlaying) {
+                // Assuming 'vehicles' is the key in your JSON data
+                const vehicles = data.vehicles;
+                const container = document.querySelector('.img-container');
+                container.innerHTML = ''; // Clear previous content
+                if (vehicles.length === 0) {
+                    container.innerHTML = `
+                        <div class="img-container">
+                            <div class="lp-img">
+                                <img src="" alt="Number Plate Image"
+                                    style="width: 100%; height: 100%; object-fit: contain;">
+                            </div>
+                        </div>
+                    `;// Append the new HTML
+                } else {
+                    vehicles.forEach(vehicle => {
+                        const vehicleHTML = `
+                            <div class="img-container">
+                                <div class="lp-img">
+                                    <img src="${vehicle}" alt="Number Plate Image"
+                                        style="width: 100%; height: 100%; object-fit: contain;">
+                                </div>
+                            </div>
+                        `;
+                        container.innerHTML += vehicleHTML; // Append the new HTML
+                    });
+
+                }
+
+                document.querySelector('.dynamic-values').innerHTML = `
+                <div class="text-white text-body">
+                    <h3 class="text-white">Total Vehicles</h3>
+                    <p>${data.total_vehicle}</p>
+                </div>
+                <div class="text-white text-body">
+                    <h3 class="text-white">Total Number Plates</h3>
+                    <p>${data.total_license}</p>
+                </div>
+                <div class="text-white text-body">
+                    <h3 class="text-white">Current Vehicles</h3>
+                    <p>${data.current_vehicle}</p>
+                </div>
+                <div class="text-white text-body">
+                    <h3 class="text-white">Current Number Plates</h3>
+                    <p>${data.current_license}</p>
+                </div>
+            `;
+
+            }
+
+        })
+        .catch(error => {
+            console.error('Error fetching the JSON file:', error);
+        });
 }
-
-// Function to update dynamic values
-async function updateDynamicValues() {
-    try {
-        const response = await fetch('/track_data');
-        const data = await response.json();
-
-        document.querySelector('.dynamic-values').innerHTML = `
-            <div class="text-white text-body">
-                <h3 class="text-white">Total Vehicles</h3>
-                <p>${data.total_vehicle}</p>
-            </div>
-            <div class="text-white text-body">
-                <h3 class="text-white">Total Number Plates</h3>
-                <p>${data.total_license}</p>
-            </div>
-            <div class="text-white text-body">
-                <h3 class="text-white">Current Vehicles</h3>
-                <p>${data.current_vehicle}</p>
-            </div>
-            <div class="text-white text-body">
-                <h3 class="text-white">Current Number Plates</h3>
-                <p>${data.current_license}</p>
-            </div>
-        `;
-    } catch (error) {
-        console.error('Error fetching track data:', error);
-    }
-}
-
 
 
 function updateLabel() {
@@ -79,7 +121,7 @@ function uploadFile(file, callback) {
 
     var xhr = new XMLHttpRequest();
     xhr.open('POST', '/upload_video', true);
-    xhr.onreadystatechange = function() {
+    xhr.onreadystatechange = function () {
         if (xhr.readyState == 4 && xhr.status == 200) {
             var response = JSON.parse(xhr.responseText);
             if (response.filename) {
@@ -95,9 +137,9 @@ function uploadFile(file, callback) {
 function detectVideo() {
     var fileInput = document.getElementById('file');
     var file = fileInput.files[0];
-    
+
     if (file) {
-        uploadFile(file, function(filename) {
+        uploadFile(file, function (filename) {
             var videoStream = document.getElementById('videoStream');
             var videoUpContainer = document.querySelector('.video-up-container');
             videoUpContainer.style.display = 'none'; // Hide the upload container
@@ -108,6 +150,7 @@ function detectVideo() {
             let detect_button = document.getElementById('detect-btn') // Disable the detect button
             detect_button.disabled = true;
             detect_button.style.backgroundColor = 'grey';
+            intervalId = setInterval(readJSON, 1000);
         });
         isDetecting = true;
         playPauseVideo();
@@ -132,13 +175,14 @@ function playPauseVideo() {
     var xhr = new XMLHttpRequest();
     xhr.open('POST', '/play_pause', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.onreadystatechange = function() {
+    xhr.onreadystatechange = function () {
         if (xhr.readyState == 4 && xhr.status == 200) {
             var response = JSON.parse(xhr.responseText);
             isPlaying = response.playing;
             ppb = document.getElementById('play-pause-btn');
             ppb.textContent = isPlaying ? 'Pause' : 'Play';
             ppb.style.backgroundColor = isPlaying ? 'red' : 'green';
+
         }
     };
     xhr.send();
@@ -147,7 +191,7 @@ function playPauseVideo() {
 function cancelStream() {
     var xhr = new XMLHttpRequest();
     xhr.open('POST', '/cancel_stream', true);
-    xhr.onreadystatechange = function() {
+    xhr.onreadystatechange = function () {
         if (xhr.readyState == 4 && xhr.status == 200) {
             // Reset the file input and other UI elements
             document.getElementById('file').value = '';
@@ -165,16 +209,12 @@ function cancelStream() {
             isPlaying = false;
             isDetecting = false;
             console.log('streaming')
+
         }
+
     };
     xhr.send();
 }
-
-if (isPlaying) {
-    // Call updateDynamicValues every second (1000 milliseconds)
-    setInterval(readJSON, 1000);
-}
-
 
 
 

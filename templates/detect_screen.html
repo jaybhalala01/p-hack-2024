@@ -18,7 +18,6 @@
     <!-- CSS Files -->
     <!-- <link id="pagestyle" href="{{ url_for('static',filename='assets/css/material-kit.css') }}" rel="stylesheet" /> -->
     <link href="{{ url_for('static',filename='assets/css/material-kit-2.css') }}" rel="stylesheet" />
-    <script type="text/javascript" src="{{ url_for('static',filename='assets/json/track.json') }}"></script>
 
     <!-- <script defer data-site="quality-critics.com" src="https://api.nepcha.com/js/nepcha-analytics.js"></script> -->
     <style>
@@ -75,20 +74,14 @@
                 </div>
             </div>
 
+            <h3>License Plate: </h3>
             <div class="img-container">
-                <h3>Vehicle: </h3>
-                <div class="vehicle-img">
-                    <img src="{{ url_for('static', filename='assets/img/bg70.jpg') }}" alt="Vehicle Image"
-                        style="width: 100%; height: 100%; object-fit: contain;">
-                </div>
-                <h4>License Plate: </h4>
                 <div class="lp-img">
-                    <img src="{{ url_for('static', filename='assets/img/bg70.jpg') }}" alt="Number Plate Image"
+                    <img src="" alt="Number Plate Image"
                         style="width: 100%; height: 100%; object-fit: contain;">
                 </div>
-
             </div>
-            <h3>Detected Vehicle No: <br> GJ27 01 8239</h3>
+            <!-- <h3>Detected Vehicle No: <br> GJ27 01 8239</h3> -->
         </div>
     </div>
     <div class="bottom">
