@@ -1,9 +1,6 @@
 # Vehicle Detection and Tracking Application
 
-<video width="640" height="400" controls>
-  <source src="demo_video/demo.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+https://github.com/user-attachments/assets/b86faf34-7995-4aad-9632-2cc51beb8b04
 
 ## Overview
 
